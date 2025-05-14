@@ -18,13 +18,16 @@ public class BettorIntegrationTests {
 
     @Test
     void shouldCreateANewBettor() {
-        ResponseEntity<Void> createResponse = testRestTemplate.postForEntity("/bet", new Bettor(null,"Joao","joao","joao123"), Void.class);
+        ResponseEntity<Void> createResponse = testRestTemplate.postForEntity("/bettracker",
+                new Bettor(null,"Joao","joao","joao123"), Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
     @Test
-    void shouldNotCreateANewBettorThatUsernameAlreadyExists(){
-        ResponseEntity<Void> createResponse = testRestTemplate.postForEntity("/bet", new Bettor(null,"Felipe2","felipe","felipe321"), Void.class);
+    void shouldNotCreateANewBettorThatUsernameAlreadyExists() {
+        ResponseEntity<Void> createResponse = testRestTemplate.postForEntity("/bettracker",
+                new Bettor(null, "Felipe2", "felipe", "felipe321"), Void.class);
         assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
     }
+
 }
